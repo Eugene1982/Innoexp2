@@ -1,8 +1,8 @@
 [
     {
-        "id": "b9dd6f3a.9f86b",
+        "id": "6455cc0a.9c6864",
         "type": "tab",
-        "label": "Arduino Serial",
+        "label": "Arduino Serial Json",
         "disabled": true,
         "info": ""
     },
@@ -17,7 +17,7 @@
         "id": "edf119a8.7f5ce8",
         "type": "tab",
         "label": "Arduino MQTT",
-        "disabled": true,
+        "disabled": false,
         "info": ""
     },
     {
@@ -139,9 +139,9 @@
         "databits": "8",
         "parity": "none",
         "stopbits": "1",
-        "newline": "\\n",
+        "newline": "100",
         "bin": "false",
-        "out": "char",
+        "out": "time",
         "addchar": false
     },
     {
@@ -191,7 +191,7 @@
         "state": "ANALOG",
         "arduino": "9317e5dc.e98448",
         "x": 110,
-        "y": 40,
+        "y": 100,
         "wires": [
             [
                 "1f3de705.3a2559"
@@ -221,7 +221,7 @@
         "seg1": "",
         "seg2": "",
         "x": 360,
-        "y": 40,
+        "y": 100,
         "wires": []
     },
     {
@@ -240,7 +240,7 @@
         "max": "255",
         "step": 1,
         "x": 90,
-        "y": 100,
+        "y": 160,
         "wires": [
             [
                 "86c559cb.916368"
@@ -256,119 +256,6 @@
         "state": "PWM",
         "arduino": "9317e5dc.e98448",
         "x": 350,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "c94c9fd.0b28a6",
-        "type": "comment",
-        "z": "b9dd6f3a.9f86b",
-        "name": "Uses node-red-node-serialport",
-        "info": "Note that Arduino Serial.println sends \\r\\n at the end of a line. These need to be filtered out.",
-        "x": 137.5,
-        "y": 45.44999694824219,
-        "wires": []
-    },
-    {
-        "id": "6e28fff9.5ed9a",
-        "type": "serial in",
-        "z": "b9dd6f3a.9f86b",
-        "name": "Arduino light sensor",
-        "serial": "6e42de2a.a9375",
-        "x": 110,
-        "y": 100,
-        "wires": [
-            [
-                "d3f8f53a.341268"
-            ]
-        ]
-    },
-    {
-        "id": "d3f8f53a.341268",
-        "type": "function",
-        "z": "b9dd6f3a.9f86b",
-        "name": "Remove line breaks",
-        "func": "msg.payload = msg.payload.replace(/(\\r\\n|\\n|\\r)/gm,\"\");\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 340,
-        "y": 100,
-        "wires": [
-            [
-                "551b6076.efbc2"
-            ]
-        ]
-    },
-    {
-        "id": "551b6076.efbc2",
-        "type": "ui_gauge",
-        "z": "b9dd6f3a.9f86b",
-        "name": "",
-        "group": "189857a1.8a3938",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Light intensity",
-        "label": "units",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "1024",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "x": 560,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "74dc9d33.b4e104",
-        "type": "ui_slider",
-        "z": "b9dd6f3a.9f86b",
-        "name": "",
-        "label": "LED dimmer",
-        "group": "189857a1.8a3938",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "topic": "",
-        "min": 0,
-        "max": "255",
-        "step": "1",
-        "x": 90,
-        "y": 160,
-        "wires": [
-            [
-                "56937cb2.47d024"
-            ]
-        ]
-    },
-    {
-        "id": "56937cb2.47d024",
-        "type": "debounce",
-        "z": "b9dd6f3a.9f86b",
-        "time": "100",
-        "name": "",
-        "x": 260,
-        "y": 160,
-        "wires": [
-            [
-                "1f5d90bc.1a92af"
-            ]
-        ]
-    },
-    {
-        "id": "1f5d90bc.1a92af",
-        "type": "serial out",
-        "z": "b9dd6f3a.9f86b",
-        "name": "Arduino LED",
-        "serial": "6e42de2a.a9375",
-        "x": 430,
         "y": 160,
         "wires": []
     },
@@ -381,7 +268,7 @@
         "state": "INPUT",
         "arduino": "9317e5dc.e98448",
         "x": 100,
-        "y": 160,
+        "y": 220,
         "wires": [
             [
                 "1e81f2a4.e44d3d"
@@ -411,7 +298,7 @@
         "officon": "",
         "offcolor": "",
         "x": 360,
-        "y": 160,
+        "y": 220,
         "wires": [
             []
         ]
@@ -425,7 +312,7 @@
         "state": "ANALOG",
         "arduino": "9317e5dc.e98448",
         "x": 110,
-        "y": 40,
+        "y": 100,
         "wires": [
             [
                 "dff284e.c1c0378"
@@ -454,8 +341,8 @@
         ],
         "seg1": "",
         "seg2": "",
-        "x": 740,
-        "y": 100,
+        "x": 719,
+        "y": 160,
         "wires": []
     },
     {
@@ -474,7 +361,7 @@
         "max": "255",
         "step": 1,
         "x": 90,
-        "y": 180,
+        "y": 240,
         "wires": [
             [
                 "9a0a70a1.fde3f"
@@ -489,8 +376,8 @@
         "pin": "3",
         "state": "PWM",
         "arduino": "9317e5dc.e98448",
-        "x": 730,
-        "y": 240,
+        "x": 709,
+        "y": 300,
         "wires": []
     },
     {
@@ -502,10 +389,10 @@
         "state": "INPUT",
         "arduino": "9317e5dc.e98448",
         "x": 100,
-        "y": 320,
+        "y": 380,
         "wires": [
             [
-                "7e390502.d66e6c"
+                "7097735f.4362ac"
             ]
         ]
     },
@@ -524,15 +411,15 @@
         "topic": "",
         "style": "",
         "onvalue": "true",
-        "onvalueType": "str",
+        "onvalueType": "bool",
         "onicon": "",
         "oncolor": "",
         "offvalue": "false",
-        "offvalueType": "str",
+        "offvalueType": "bool",
         "officon": "",
         "offcolor": "",
-        "x": 740,
-        "y": 380,
+        "x": 580,
+        "y": 440,
         "wires": [
             []
         ]
@@ -542,12 +429,12 @@
         "type": "mqtt out",
         "z": "edf119a8.7f5ce8",
         "name": "",
-        "topic": "innoexp2/nano_rovale/light",
+        "topic": "evs/innoexp2/nano_rovale/light",
         "qos": "",
         "retain": "",
         "broker": "59ee8ac7.042ac4",
-        "x": 500,
-        "y": 40,
+        "x": 481,
+        "y": 100,
         "wires": []
     },
     {
@@ -555,11 +442,11 @@
         "type": "mqtt in",
         "z": "edf119a8.7f5ce8",
         "name": "",
-        "topic": "innoexp2/nano_rovale/light",
+        "topic": "evs/innoexp2/nano_rovale/light",
         "qos": "0",
         "broker": "59ee8ac7.042ac4",
-        "x": 490,
-        "y": 100,
+        "x": 481,
+        "y": 160,
         "wires": [
             [
                 "3955a3b9.a0b1cc"
@@ -577,8 +464,8 @@
         "countLimit": 0,
         "blockSize": 0,
         "locked": false,
-        "x": 270,
-        "y": 40,
+        "x": 265,
+        "y": 100,
         "wires": [
             [
                 "74221607.b6bfe8"
@@ -590,12 +477,12 @@
         "type": "mqtt out",
         "z": "edf119a8.7f5ce8",
         "name": "",
-        "topic": "innoexp2/nano_rovale/dimmer",
+        "topic": "evs/innoexp2/nano_rovale/dimmer",
         "qos": "",
         "retain": "",
         "broker": "59ee8ac7.042ac4",
-        "x": 510,
-        "y": 180,
+        "x": 491,
+        "y": 240,
         "wires": []
     },
     {
@@ -603,11 +490,11 @@
         "type": "mqtt in",
         "z": "edf119a8.7f5ce8",
         "name": "",
-        "topic": "innoexp2/nano_rovale/dimmer",
+        "topic": "evs/innoexp2/nano_rovale/dimmer",
         "qos": "2",
         "broker": "59ee8ac7.042ac4",
-        "x": 490,
-        "y": 240,
+        "x": 481,
+        "y": 300,
         "wires": [
             [
                 "a40905ca.11edb8"
@@ -620,8 +507,8 @@
         "z": "edf119a8.7f5ce8",
         "time": "500",
         "name": "",
-        "x": 260,
-        "y": 180,
+        "x": 240,
+        "y": 240,
         "wires": [
             [
                 "d698c6.e484f738"
@@ -633,12 +520,12 @@
         "type": "mqtt out",
         "z": "edf119a8.7f5ce8",
         "name": "",
-        "topic": "innoexp2/nano_rovale/button",
+        "topic": "evs/innoexp2/nano_rovale/button",
         "qos": "",
         "retain": "",
         "broker": "59ee8ac7.042ac4",
-        "x": 500,
-        "y": 320,
+        "x": 640,
+        "y": 380,
         "wires": []
     },
     {
@@ -646,29 +533,16 @@
         "type": "mqtt in",
         "z": "edf119a8.7f5ce8",
         "name": "",
-        "topic": "innoexp2/nano_rovale/button",
+        "topic": "evs/innoexp2/nano_rovale/button",
         "qos": "2",
         "broker": "59ee8ac7.042ac4",
-        "x": 490,
-        "y": 380,
+        "x": 150,
+        "y": 440,
         "wires": [
             [
-                "3eac992b.03f966",
-                "58b77a7f.d57ef4"
+                "6c3716e1.e121e8"
             ]
         ]
-    },
-    {
-        "id": "58b77a7f.d57ef4",
-        "type": "debug",
-        "z": "edf119a8.7f5ce8",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 730,
-        "y": 420,
-        "wires": []
     },
     {
         "id": "7e390502.d66e6c",
@@ -678,11 +552,298 @@
         "func": "msg.payload = msg.payload == 0;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 270,
-        "y": 320,
+        "x": 410,
+        "y": 380,
         "wires": [
             [
                 "dfb5462f.cd80c8"
+            ]
+        ]
+    },
+    {
+        "id": "bdf9a836.699ea8",
+        "type": "comment",
+        "z": "9f19090.bb78df8",
+        "name": "Uses node-red-node-arduino",
+        "info": "",
+        "x": 140,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "8243b0ed.5e0bf",
+        "type": "comment",
+        "z": "edf119a8.7f5ce8",
+        "name": "Uses node-red-node-arduino and MQTT",
+        "info": "",
+        "x": 170,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b5a295af.d020f8",
+        "type": "comment",
+        "z": "6455cc0a.9c6864",
+        "name": "Uses node-red-node-serialport sending and receiving Json",
+        "info": "Note that Arduino Serial.println sends \\r\\n at the end of a line. These need to be filtered out.",
+        "x": 230,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f2eb9d04.704c",
+        "type": "serial in",
+        "z": "6455cc0a.9c6864",
+        "name": "Arduino light sensor",
+        "serial": "6e42de2a.a9375",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "75140929.dcfde8",
+                "45853daa.b41bb4"
+            ]
+        ]
+    },
+    {
+        "id": "49a5b8e0.d66a78",
+        "type": "ui_gauge",
+        "z": "6455cc0a.9c6864",
+        "name": "",
+        "group": "189857a1.8a3938",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Light intensity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1024",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 600,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "812f8c02.7a7d1",
+        "type": "ui_slider",
+        "z": "6455cc0a.9c6864",
+        "name": "",
+        "label": "LED dimmer",
+        "group": "189857a1.8a3938",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "",
+        "min": 0,
+        "max": "255",
+        "step": "1",
+        "x": 90,
+        "y": 200,
+        "wires": [
+            [
+                "629d87bb.442ea8"
+            ]
+        ]
+    },
+    {
+        "id": "629d87bb.442ea8",
+        "type": "debounce",
+        "z": "6455cc0a.9c6864",
+        "time": "100",
+        "name": "",
+        "x": 240,
+        "y": 200,
+        "wires": [
+            [
+                "603a584b.8d66e8"
+            ]
+        ]
+    },
+    {
+        "id": "a212f57e.2193c8",
+        "type": "serial out",
+        "z": "6455cc0a.9c6864",
+        "name": "Arduino LED",
+        "serial": "6e42de2a.a9375",
+        "x": 710,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "75140929.dcfde8",
+        "type": "json",
+        "z": "6455cc0a.9c6864",
+        "name": "",
+        "pretty": false,
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "4ee3129e.497d6c"
+            ]
+        ]
+    },
+    {
+        "id": "4ee3129e.497d6c",
+        "type": "change",
+        "z": "6455cc0a.9c6864",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.light",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 100,
+        "wires": [
+            [
+                "49a5b8e0.d66a78"
+            ]
+        ]
+    },
+    {
+        "id": "603a584b.8d66e8",
+        "type": "function",
+        "z": "6455cc0a.9c6864",
+        "name": "Set dimmer value",
+        "func": "msg.payload = { dimmer: msg.payload };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "c58ef1f0.5acaa"
+            ]
+        ]
+    },
+    {
+        "id": "c58ef1f0.5acaa",
+        "type": "json",
+        "z": "6455cc0a.9c6864",
+        "name": "",
+        "pretty": false,
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "a212f57e.2193c8",
+                "b7dddc57.e074e"
+            ]
+        ]
+    },
+    {
+        "id": "45853daa.b41bb4",
+        "type": "debug",
+        "z": "6455cc0a.9c6864",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 290,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b7dddc57.e074e",
+        "type": "debug",
+        "z": "6455cc0a.9c6864",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 710,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a7bc333.833bcd",
+        "type": "mqtt out",
+        "z": "edf119a8.7f5ce8",
+        "name": "",
+        "topic": "evs/innoexp2/esp8266_rovale/command",
+        "qos": "",
+        "retain": "",
+        "broker": "59ee8ac7.042ac4",
+        "x": 500,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "3c7efee5.6d7362",
+        "type": "function",
+        "z": "edf119a8.7f5ce8",
+        "name": "CreateHornCommand",
+        "func": "msg.payload = msg.payload ?\n    {name: \"turnBoatHornOn\"}:\n    {name: \"turnBoatHornOff\"};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 200,
+        "y": 680,
+        "wires": [
+            [
+                "a7bc333.833bcd",
+                "1932bacb.0c8d55"
+            ]
+        ]
+    },
+    {
+        "id": "1932bacb.0c8d55",
+        "type": "debug",
+        "z": "edf119a8.7f5ce8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 410,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "6c3716e1.e121e8",
+        "type": "function",
+        "z": "edf119a8.7f5ce8",
+        "name": "Parse payload",
+        "func": "//MQTT returns the payload as a string.\n//Parse it to a boolean again.\nmsg.payload = msg.payload === \"true\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "3eac992b.03f966",
+                "3c7efee5.6d7362"
+            ]
+        ]
+    },
+    {
+        "id": "7097735f.4362ac",
+        "type": "debounce",
+        "z": "edf119a8.7f5ce8",
+        "time": "100",
+        "name": "",
+        "x": 260,
+        "y": 380,
+        "wires": [
+            [
+                "7e390502.d66e6c"
             ]
         ]
     }
