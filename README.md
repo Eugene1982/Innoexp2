@@ -2,7 +2,7 @@
 
 During this second Innnoexp we will explore creating physical 'Things' using [Arduinos](https://www.arduino.cc/en/Guide/Introduction) and similar boards and a wide range of sensors and actuators. Then we will connect them to the Internet of Things using the [MQTT](https://www.hivemq.com/mqtt-essentials/) protocol and [Node-RED](https://nodered.org/). The idea is to get up to speed with the technology as quickly as possible, to give room for creative thoughts and innovation to happen.
 
-This repository contains some Arduino sketches and NODE-Red flows used to introduce the basic concepts.
+This repository contains some Arduino sketches and Node-Red flows used to introduce the basic concepts.
 
 ## Arduino sketches
 Arduino boards are able to read inputs - light on a sensor, a finger on a button - and turn it into an output - activating a motor, turning on an LED. You can tell your board what to do by sending a set of instructions to the microcontroller on the board. To do so you use the [Arduino programming language](https://www.arduino.cc/reference/en/), and the [Arduino IDE](https://www.arduino.cc/en/main/software).
@@ -40,16 +40,23 @@ It introduces:
     - prints the value to the [serial](https://www.arduino.cc/reference/en/language/functions/communication/serial/) line.
     - uses a [non-blocking pattern](https://www.arduino.cc/en/Tutorial/BlinkWithoutDelay) to time the print-outs.
 
-### Serial input
-Reads a numeric value (0-255) from the serial input and dims the LED accordingly.
+### Json
+Uses the serial interface. Sends the light sensor value every 500 seconds:
+``` json
+{"light": <0-1024>}
+```
 
-It introduces:
-- The [sketch](./Arduino/04-SerialInput/04-SerialInput.ino)
-    - [reads an integer value](https://www.arduino.cc/en/Reference/ParseInt) from the serial line.
-    - uses [PWM](https://www.arduino.cc/en/Tutorial/PWM) to dim the LED.
+Sets the dim value of the LED after receiving:
+``` json
+{dimmer: <0-255>}
+```
 
-### ArduinoSerial
-This [sketch](./Arduino/05-ArduinoSerial/05-ArduinoSerial.ino) is used for the integration of the Arduino with Node-RED using serial input/output. It creates a homebrew protocol where integer input values are used for setting the dim level of the LED and integer output values are used for getting the light intensity.
+The [sketch](./Arduino/04-Json/04-Json.ino) introduces:
+- usage of a [library](https://www.arduino.cc/en/Guide/Libraries) to create / parse json messages: [ArduinoJson](https://arduinojson.org).
+- power modulation ([PWM](https://www.arduino.cc/en/Tutorial/PWM)) to dim the LED.
+
+### BoatHorn
+This [sketch](./Arduino/05-BoatHorn/05-BoatHorn.ino) used to connect an ESP-8266 directly to an MQTT broker and make it send status messages and respond on commands.
 
 ## Node-RED flows
 Node-RED is a programming tool for wiring together hardware devices, APIs and online services in new and interesting ways.
@@ -58,8 +65,8 @@ It provides a browser-based editor that makes it easy to wire together flows usi
 
 All flows in this repository connect the Aruino through the serial port to Node-Red.
 
-### Arduino Serial
-Connects the Arduino to NODE-Red using the [ArduinoSerial](./Arduino/05-ArduinoSerial/05-ArduinoSerial.ino) sketch and [serialport](https://flows.nodered.org/node/node-red-node-serialport) nodes. On the NODE-Red dashboard it displays a gauge for the light intensity and a dimmer slider for the LED.
+### Arduino Serial Json
+Connects the Arduino to NODE-Red using the [Json](./Arduino/04-Json/04-Json.ino) sketch and [serialport](https://flows.nodered.org/node/node-red-node-serialport) nodes. On the NODE-Red dashboard it displays a gauge for the light intensity and a dimmer slider for the LED.
 
 ### Arduino Firmata
 The same as the previous flow but now using the [Firmata](https://github.com/firmata/protocol) protocol with [Arduino](https://www.npmjs.com/package/node-red-node-arduino) nodes. It also adds a button to the dashboard to show the state of the button on the Arduino board.
